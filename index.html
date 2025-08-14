@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FlavorNest Slider</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .carousel-item img {
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .caption-box {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .slide-wrapper {
+            position: relative;
+        }
+
+        .scrolling-wrapper {
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .scrolling-wrapper .col-md-4 {
+            display: inline-block;
+            float: none;
+            width: 80%;
+            max-width: 300px;
+            margin-right: 15px;
+        }
+
+        .glowing-text {
+            font-size: 1.8rem;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #ff6a00, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255, 106, 0, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .glowing-text:hover {
+            transform: scale(1.05);
+        }
+
+        /* Horizontal scrolling for mobile */
+        .carousel-inner .carousel-item .scrolling-row {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .scrolling-row>.slide-wrapper {
+            flex: 0 0 auto;
+            width: 85%;
+            max-width: 300px;
+            margin-right: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .scrolling-row {
+                flex-wrap: wrap !important;
+                overflow-x: unset;
+            }
+
+            .scrolling-row>.slide-wrapper {
+                flex: 1 1 0;
+                width: auto;
+                margin-right: 0;
+            }
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInZoom {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .carousel-item .slide-wrapper {
+            animation: fadeInZoom 1s ease forwards;
+            opacity: 0;
+        }
+
+        .carousel-item.active .slide-wrapper {
+            animation-delay: 0.3s;
+            opacity: 1;
+        }
+
+        /* Image hover zoom */
+        .carousel-item img {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .carousel-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Caption animation */
+        .caption-box {
+            animation: fadeInZoom 1s ease;
+        }
+
+        /* Button hover effects */
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-control-prev-icon:hover,
+        .carousel-control-next-icon:hover {
+            transform: scale(1.2);
+        }
+
+        /* Section titles */
+        h2.text-center {
+            font-weight: bold;
+            color: #003366;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            animation: fadeInZoom 1s ease;
+        }
+
+        .sticky-mobile-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 9999;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+            font-size: 14px;
+        }
+
+        .sticky-mobile-nav a {
+            flex: 1;
+        }
+
+        .sticky-mobile-nav div {
+            line-height: 1.2;
+        }
+
+        /* Search Bar Styling */
+        #recipeSearch {
+            font-size: 1rem;
+            background-color: #fffbe6;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+        }
+
+        #recipeSearch:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+            background-color: #fffde1;
+        }
+
+        /* Input group styling */
+        .input-group-text {
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+
+        .input-group-text:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 153, 0, 0.4);
+        }
+
+        /* Scroll-to-Top Button Style */
+        #scrollTopBtn {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 9999;
+            font-size: 24px;
+            background: linear-gradient(45deg, #ff6a00, #ffcc00);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 12px 16px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        #scrollTopBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        #surpriseBtn {
+            position: fixed;
+            bottom: 140px;
+            right: 20px;
+            z-index: 9999;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        #surpriseBtn:hover {
+            background-color: #ff8800;
+            transform: scale(1.05);
+        }
+
+        body {
+            opacity: 0;
+            animation: fadeInBody 1s ease-in forwards;
+        }
+
+        @keyframes fadeInBody {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="modal fade" id="learningModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center bg-dark text-white">
+                <div class="modal-body">
+                    <h4 class="modal-title w-100">📚 Keep Learning Tasty Recipes 📚</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inside your navbar (replace only the contact line) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold glowing-text" href="#">
+                🍴 Flavor<span style="color: #ff5e62;">Nest</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#recipes">Recipes</a></li>
+
+                    <!-- Updated Contact Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#contact" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Meal plan
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="mealplan.html">Weekly meal plans</a></li>
+                            <li><a class="dropdown-item" href="diet chart.html">Diet charts</a></li>
+                            <li><a class="dropdown-item" href="tiffin.html">Tiffin ideas</a></li>
+                        </ul>
+                    </li>
+                    <!-- End Contact Dropdown -->
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Featured Recipes Slider -->
+    <div class="container-fluid my-5">
+        <h2 class="text-center mb-4">🍽️ Featured Recipes</h2>
+
+        <div id="flavorSlider" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row scrolling-row d-flex flex-row">
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="COLD COFFEE.html">
+                                <img src="coffee.jpg" class="d-block w-100" alt="Grilled Chicken">
+                                <div class="caption-box">Cold coffee</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="tanduri pasta.html">
+                                <img src="tanduri pasta.jpg" class="d-block w-100" alt="Paneer Tikka">
+                                <div class="caption-box">tanduri pasta</div>
+                            </a>
+                        </div>
+
+
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="fruit salad.html">
+                                <img src="salad.jpg" class="d-block w-100" alt="Fruit Salad">
+                                <div class="caption-box">Fresh Fruit Salad</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="fried rice.html">
+                                <img src="pannner fried recipes.jpg" class="d-block w-100" alt="Pasta">
+                                <div class="caption-box">Paneer Fried Rice</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="chiken sandwich.html">
+                                <img src="chiken sandwich.jpg" class="d-block w-100" alt="Pasta">
+                                <div class="caption-box">Chiken sandwich</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row scrolling-row d-flex flex-row">
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="butterchiken.html">
+                                <img src="butter chiken.jpg" class="d-block w-100" alt="Butter Chicken">
+                                <div class="caption-box">Classic Butter Chicken</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="vadapav.html">
+                                <img src="vadapav.jpg" class="d-block w-100" alt="Vegan Buddha Bowl">
+                                <div class="caption-box">Vada pav</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="cake.html">
+                                <img src="chocolate-cake-table.jpg" class="d-block w-100" alt="Chocolate Cake">
+                                <div class="caption-box">Chocolate Cake</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="mini samosa.html">
+                                <img src="mini samosa.jpg" class="d-block w-100" alt="Pasta">
+                                <div class="caption-box">Mini samosa</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="soya cutlet.html">
+                                <img src="soya cuttlet.jpg" class="d-block w-100" alt="Pasta">
+                                <div class="caption-box">Soya cuttlet</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row scrolling-row d-flex flex-row">
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="stuffed aloo paratha.html">
+                                <img src="paratha.jpg" class="d-block w-100" alt="Stuffed Paratha">
+                                <div class="caption-box">Stuffed Aloo Paratha</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="moongdalkhichadi.html">
+                                <img src="khichdi.jpg" class="d-block w-100" alt="Ayurvedic Kitchari">
+                                <div class="caption-box">Ayurvedic Kitchari</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="chiken sizzeler.html">
+                                <img src="chiken sizz.jpg" class="d-block w-100" alt="Tandoori Chicken">
+                                <div class="caption-box">Tandoori Chicken Sizzle</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="aalu tikki.html">
+                                <img src="Aalu tikki.jpg" class="d-block w-100" alt="Pasta">
+                                <div class="caption-box">Aalu tikki</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="curd rice.html">
+                                <img src="Dahi rice.jpg" class="d-block w-100" alt="Pasta">
+                                <div class="caption-box">Dahi rice</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#flavorSlider" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark rounded-circle"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#flavorSlider" data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark rounded-circle"></span>
+            </button>
+        </div>
+    </div>
+
+    <section id="about" class="py-5" style="background: linear-gradient(135deg, #f9f9f9, #f1f1f1);">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Image -->
+                <div class="col-md-6 text-center mb-4 mb-md-0">
+                    <img src="chef.jpg" class="img-fluid rounded shadow" alt="About Us" style="max-width: 80%;">
+                </div>
+
+                <!-- Text Content -->
+                <div class="col-md-6">
+                    <h2 class="fw-bold mb-3" style="color: #003366;">About FlavorNest</h2>
+                    <p class="lead">
+                        Welcome to <strong>FlavorNest</strong> – your go-to place for mouthwatering recipes, creative
+                        cooking tips, and daily tiffin ideas! Whether you're a foodie, a busy student, or just someone
+                        looking for something new, we've got the flavor that fits your day.
+                    </p>
+                    <a href="#recipes" class="btn btn-warning rounded-pill px-4 py-2 mt-3">Explore Recipes</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- More Recipes Slider -->
+    <div id="recipes" class="container-fluid my-5">
+        <h2 class="text-center mb-4">More Tasty Picks</h2>
+        <div id="moreSlider" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row scrolling-row d-flex flex-row">
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="FRIES.html">
+                                <img src="crispy-french-fries.jpg" class="d-block w-100" alt="Pasta">
+                                <div class="caption-box">French fries</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="muttonrogan josh.html">
+                                <img src="nonveg.jpg" class="d-block w-100" alt="Egg Curry">
+                                <div class="caption-box">Mutton rogan josh</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="masaladosa.html">
+                                <img src="dosa.jpg" class="d-block w-100" alt="Banana Pancakes">
+                                <div class="caption-box">Masala dosa</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="momo.html">
+                                <img src="chiken momos.jpg" class="d-block w-100" alt="Pasta">
+                                <div class="caption-box">Chiken momos</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="sewai.html">
+                                <img src="sewai kheer.jpg" class="d-block w-100" alt="Pasta">
+                                <div class="caption-box">Sewai kheer</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row scrolling-row d-flex flex-row">
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="yakhnipulao.html">
+                                <img src="biryani chiken.jpg" class="d-block w-100" alt="Salad">
+                                <div class="caption-box">Chiken yakhni pulao</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="omlet.html">
+                                <img src="omlet.jpg" class="d-block w-100" alt="Fried Rice">
+                                <div class="caption-box">Omlet</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="motichoor.html">
+                                <img src="desert.jpg" class="d-block w-100" alt="Rasgulla">
+                                <div class="caption-box">Motichur laddu</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="surmai fry.html">
+                                <img src="Surmai fry.jpg" class="d-block w-100" alt="Pasta">
+                                <div class="caption-box">Surmai fry</div>
+                            </a>
+                        </div>
+                        <div class="col-sm-3 slide-wrapper">
+                            <a href="kanda pakoda.html">
+                                <img src="Kanda pakoda.jpg" class="d-block w-100" alt="Pasta">
+                                <div class="caption-box">Kanda pakoda</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div><br><br>
+            <div id="recipes" class="container-fluid my-5">
+
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#moreSlider" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#moreSlider" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle"></span>
+                </button>
+            </div>
+        </div>
+        <!-- Explore More Flavors Slider -->
+        <div id="moreFlavors" class="container-fluid my-5">
+            <h2 class="text-center mb-4">Explore More Flavors</h2>
+            <div id="extraSlider" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row scrolling-row d-flex flex-row">
+                            <div class="col-sm-3 slide-wrapper">
+                                <a href="methithepla.html">
+                                    <img src="healthy.jpg" class="d-block w-100" alt="Pav Bhaji">
+                                    <div class="caption-box">Healthy Methi thepla</div>
+                                </a>
+                            </div>
+                            <div class="col-sm-3 slide-wrapper">
+                                <a href="bharta.html">
+                                    <img src="baingan ka bharta.jpg" class="d-block w-100" alt="Veg Pulao">
+                                    <div class="caption-box">baingan ka bharta</div>
+                                </a>
+                            </div>
+                            <div class="col-sm-3 slide-wrapper">
+                                <a href="crispy prawns.html">
+                                    <img src="fried prwans.jpg" class="d-block w-100" alt="Gajar Halwa">
+                                    <div class="caption-box">Fried crispy prawns</div>
+                                </a>
+                            </div>
+                            <div class="col-sm-3 slide-wrapper">
+                                <a href="cheese cake.html">
+                                    <img src="cheese cake with cheeri toping.jpg" class="d-block w-100" alt="Pasta">
+                                    <div class="caption-box">cheese cake with chery topping</div>
+                                </a>
+                            </div>
+                            <div class="col-sm-3 slide-wrapper">
+                                <a href="veg pizza.html">
+                                    <img src="veg pizza.jpg" class="d-block w-100" alt="Pasta">
+                                    <div class="caption-box">Veg pizza</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row scrolling-row d-flex flex-row">
+                            <div class="col-sm-3 slide-wrapper">
+                                <a href="crab.html">
+                                    <img src="crab sizzle.jpg" class="d-block w-100" alt="Veg Manchurian">
+                                    <div class="caption-box">Roasted crab</div>
+                                </a>
+                            </div>
+                            <div class="col-sm-3 slide-wrapper">
+                                <a href="curry.html">
+                                    <img src="prawn curry.jpg" class="d-block w-100" alt="Milkshake">
+                                    <div class="caption-box">Prawn curry</div>
+                                </a>
+                            </div>
+                            <div class="col-sm-3 slide-wrapper">
+                                <a href="chikentacco.html">
+                                    <img src="Chiken tacco.jpg" class="d-block w-100" alt="Gulab Jamun">
+                                    <div class="caption-box">Chiken Tacco</div>
+                                </a>
+                            </div>
+                            <div class="col-sm-3 slide-wrapper">
+                                <a href="puff pastry.html">
+                                    <img src="aalu puff.jpg" class="d-block w-100" alt="Pasta">
+                                    <div class="caption-box">Aalu puff</div>
+                                </a>
+                            </div>
+                            <div class="col-sm-3 slide-wrapper">
+                                <a href="burger.html">
+                                    <img src="chiken burger.jpg" class="d-block w-100" alt="Pasta">
+                                    <div class="caption-box">chiken burger</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#extraSlider" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#extraSlider" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle"></span>
+                </button>
+            </div>
+        </div>
+        <!-- Stylish Recipe Search -->
+        <div class="container-fluid my-5">
+            <div class="input-group shadow-sm rounded-pill">
+                <input type="text" id="recipeSearch" class="form-control rounded-start-pill border-0 py-3 px-4"
+                    placeholder="🔍 Search your favorite recipe..." aria-label="Search">
+                <span class="input-group-text bg-gradient text-white rounded-end-pill border-0 px-4"
+                    style="background: linear-gradient(45deg, #ff6a00, #ffcc00);">
+                    Go
+                </span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer id="Contact" class="bg-dark text-light text-center py-4 container-fluid">
+            <p class="mb-0">&copy; 2025 FlavorNest. All Rights Reserved.</p>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            const modal = new bootstrap.Modal(document.getElementById('learningModal'));
+            modal.show();
+            setTimeout(() => {
+                modal.hide();
+            }, 3000);
+
+            document.getElementById('recipeSearch').addEventListener('keyup', function () {
+                const search = this.value.toLowerCase();
+                const items = document.querySelectorAll('#recipes .slide-wrapper');
+
+                items.forEach(item => {
+                    const caption = item.querySelector('.caption-box')?.textContent.toLowerCase();
+                    if (caption && caption.includes(search)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+
+            // Show button when scroll down
+            window.onscroll = function () {
+                const btn = document.getElementById("scrollTopBtn");
+                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    btn.style.display = "block";
+                } else {
+                    btn.style.display = "none";
+                }
+            };
+
+            // Smooth scroll to top
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+
+
+            function showRandomRecipe() {
+                const recipes = [
+                    "Cheesy Garlic Bread",
+                    "Masala Maggi",
+                    "Fruit Yogurt Parfait",
+                    "Cold Coffee Delight",
+                    "Paneer Tikka Wrap",
+                    "Vada Pav",
+                    "Schezwan Noodles",
+                    "Chocolate Mug Cake"
+                ];
+                const random = recipes[Math.floor(Math.random() * recipes.length)];
+                alert("🎉 Surprise Recipe:\n" + random + "\nGive it a try today!");
+            }
+
+
+        </script>
+
+        <!-- Sticky Mobile Navbar -->
+        <div
+            class="sticky-mobile-nav d-md-none d-flex justify-content-around align-items-center bg-dark text-white py-2">
+            <a href="#" class="text-white text-decoration-none text-center">
+                <div>🏠<br><small>Home</small></div>
+            </a>
+            <a href="#about" class="text-white text-decoration-none text-center">
+                <div>👨‍🍳<br><small>About</small></div>
+            </a>
+            <a href="#recipes" class="text-white text-decoration-none text-center">
+                <div>🍽️<br><small>Recipes</small></div>
+            </a>
+            <a href="mealplan.html" class="text-white text-decoration-none text-center">
+                <div>📋<br><small>Meal Plan</small></div>
+            </a>
+        </div>
+        <!-- Scroll to Top Button -->
+        <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">↑</button>
+        <!-- Surprise Me Button -->
+        <button onclick="showRandomRecipe()" id="surpriseBtn">🎲 Surprise Me!</button>
+
+</body>
+
+</html>
