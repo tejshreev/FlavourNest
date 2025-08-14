@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fried prawns</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .carousel-item img {
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .caption-box {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .slide-wrapper {
+            position: relative;
+        }
+
+        .glowing-text {
+            font-size: 1.8rem;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #ff6a00, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255, 106, 0, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .glowing-text:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <!-- Inside your navbar (replace only the contact line) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold glowing-text" href="#">
+                🍴 Flavor<span style="color: #ff5e62;">Nest</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#recipes">Recipes</a></li>
+
+                    <!-- Updated Contact Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#contact" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Meal plan
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="mealplan.html">Weekly meal plans</a></li>
+                            <li><a class="dropdown-item" href="diet chart.html">Diet charts</a></li>
+                            <li><a class="dropdown-item" href="tiffin.html">Tiffin ideas</a></li>
+                        </ul>
+                    </li>
+                    <!-- End Contact Dropdown -->
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4">FRIED PRAWNS</h2>
+        <img src="fried prwans.jpg" class="img-fluid rounded mb-4" alt="Vada Pav">
+        <h4>Ingredients:</h4>
+        <ul>
+            <li>250g medium-sized prawns (peeled and deveined)</li>
+            <li>2 tbsp cornflour</li>
+            <li>2 tbsp all-purpose flour (maida)</li>
+            <li>1 tsp red chili powder</li>
+            <li>1/2 tsp turmeric powder</li>
+            <li>1/2 tsp black pepper</li>
+            <li>1 tsp ginger-garlic paste</li>
+            <li>Salt to taste</li>
+            <li>Juice of 1/2 lemon</li>
+            <li>Oil for deep frying</li>
+        </ul>
+
+        <h4>Instructions:</h4>
+        <ol>
+            <li>In a bowl, combine cornflour, all-purpose flour, chili powder, turmeric, pepper, salt, lemon juice, and
+                ginger-garlic paste.</li>
+            <li>Add a little water to make a thick batter.</li>
+            <li>Coat the prawns well in the batter and let it marinate for 15–20 minutes.</li>
+            <li>Heat oil in a deep pan over medium heat.</li>
+            <li>Deep fry the prawns in batches until golden and crispy.</li>
+            <li>Remove and place on a paper towel to drain excess oil.</li>
+            <li>Serve hot with lemon wedges and mint chutney.</li>
+        </ol>
+    </div>
+    <!-- Footer -->
+    <footer id="Contact" class="bg-dark text-light text-center py-4">
+        <p class="mb-0">&copy; 2025 FlavorNest. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const modal = new bootstrap.Modal(document.getElementById('learningModal'));
+        modal.show();
+        setTimeout(() => {
+            modal.hide();
+        }, 3000);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>chiken yakhni pulao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .carousel-item img {
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .caption-box {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .slide-wrapper {
+            position: relative;
+        }
+
+        .glowing-text {
+            font-size: 1.8rem;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #ff6a00, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255, 106, 0, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .glowing-text:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <!-- Inside your navbar (replace only the contact line) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold glowing-text" href="#">
+                🍴 Flavor<span style="color: #ff5e62;">Nest</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#recipes">Recipes</a></li>
+
+                    <!-- Updated Contact Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#contact" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Meal plan
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="mealplan.html">Weekly meal plans</a></li>
+                            <li><a class="dropdown-item" href="diet chart.html">Diet charts</a></li>
+                            <li><a class="dropdown-item" href="tiffin.html">Tiffin ideas</a></li>
+                        </ul>
+                    </li>
+                    <!-- End Contact Dropdown -->
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4">CHIKEN YAKHNI PULAO</h2>
+        <img src="biryani chiken.jpg" class="img-fluid rounded mb-4" alt="Vada Pav">
+        <h4>Ingredients:</h4>
+        <h5>For Yakhni (Stock):</h5>
+        <ul>
+            <li>500g chicken (bone-in pieces)</li>
+            <li>1 onion (sliced)</li>
+            <li>1 tbsp ginger-garlic paste</li>
+            <li>1 bay leaf</li>
+            <li>1 cinnamon stick</li>
+            <li>4 cloves</li>
+            <li>2 green cardamoms</li>
+            <li>1 tsp salt</li>
+            <li>4 cups water</li>
+        </ul>
+
+        <h5>For Pulao:</h5>
+        <ul>
+            <li>2 cups basmati rice (soaked for 30 minutes)</li>
+            <li>2 tbsp ghee or oil</li>
+            <li>1 onion (thinly sliced)</li>
+            <li>1 green chili (slit)</li>
+            <li>1/2 tsp cumin seeds</li>
+            <li>1/2 tsp garam masala</li>
+            <li>Salt to taste</li>
+            <li>Fresh coriander and mint (for garnish)</li>
+        </ul>
+
+        <h4>Instructions:</h4>
+        <ol>
+            <li>In a pot, add all ingredients under “Yakhni” and cook for 20–25 minutes until chicken is tender.</li>
+            <li>Strain and reserve the stock. Remove chicken pieces and set aside.</li>
+            <li>In another pan, heat ghee/oil. Add cumin seeds, sliced onion, and green chili. Sauté till golden.</li>
+            <li>Add the cooked chicken, garam masala, and sauté for 2–3 minutes.</li>
+            <li>Add soaked rice and the reserved chicken stock (approx. 4 cups). Adjust salt.</li>
+            <li>Cover and cook on low heat until rice is fully cooked and water is absorbed.</li>
+            <li>Fluff with fork, garnish with mint & coriander. Serve hot with raita or salad.</li>
+        </ol>
+    </div>
+
+    <!-- Footer -->
+    <footer id="Contact" class="bg-dark text-light text-center py-4">
+        <p class="mb-0">&copy; 2025 FlavorNest. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const modal = new bootstrap.Modal(document.getElementById('learningModal'));
+        modal.show();
+        setTimeout(() => {
+            modal.hide();
+        }, 3000);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>tanduri pasta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .carousel-item img {
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .caption-box {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .slide-wrapper {
+            position: relative;
+        }
+
+        .glowing-text {
+            font-size: 1.8rem;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, #ff6a00, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255, 106, 0, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .glowing-text:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <!-- Inside your navbar (replace only the contact line) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold glowing-text" href="#">
+                🍴 Flavor<span style="color: #ff5e62;">Nest</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#recipes">Recipes</a></li>
+
+                    <!-- Updated Contact Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#contact" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Meal plan
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="mealplan.html">Weekly meal plans</a></li>
+                            <li><a class="dropdown-item" href="diet chart.html">Diet charts</a></li>
+                            <li><a class="dropdown-item" href="tiffin.html">Tiffin ideas</a></li>
+                        </ul>
+                    </li>
+                    <!-- End Contact Dropdown -->
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4">TANDURI PASTA</h2>
+        <img src="tanduri pasta.jpg" class="img-fluid rounded mb-4" alt="butterchiken">
+
+
+
+        <h4>Ingredients:</h4>
+        <ul>
+            <li>2 cups pasta (penne or fusilli)</li>
+            <li>1/2 cup chopped onions</li>
+            <li>1/2 cup bell peppers (mixed colors)</li>
+            <li>1/2 cup boiled sweet corn</li>
+            <li>1/2 cup paneer cubes or shredded chicken</li>
+            <li>2 tbsp tandoori masala</li>
+            <li>1/2 cup fresh cream or mayonnaise</li>
+            <li>2 tbsp oil or butter</li>
+            <li>Salt to taste</li>
+        </ul>
+
+        <h4>Instructions:</h4>
+        <ol>
+            <li>Boil pasta until al dente and set aside.</li>
+            <li>Heat oil in a pan, sauté onions and bell peppers for 2 minutes.</li>
+            <li>Add corn and paneer/chicken. Stir in tandoori masala and cook for 3–4 minutes.</li>
+            <li>Add cooked pasta, fresh cream or mayo, and mix well. Season with salt.</li>
+            <li>Top with cheese if desired and bake for 10 mins for a baked version.</li>
+            <li>Serve hot and spicy with mint chutney or garlic bread!</li>
+        </ol>
+    </div>
+    <!-- Footer -->
+    <footer id="Contact" class="bg-dark text-light text-center py-4">
+        <p class="mb-0">&copy; 2025 FlavorNest. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const modal = new bootstrap.Modal(document.getElementById('learningModal'));
+        modal.show();
+        setTimeout(() => {
+            modal.hide();
+        }, 3000);
+    </script>
+
+</body>
+
+</html>

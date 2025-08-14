@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Weekly Meal Plan - FlavorNest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <!-- In HEAD -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fff7f0, #fff);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 2rem;
+            background: linear-gradient(to right, #ff6a00, #ee0979);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 8px rgba(255, 100, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 8px rgba(255, 100, 0, 0.3);
+            }
+
+            50% {
+                text-shadow: 0 0 15px rgba(255, 100, 0, 0.7);
+            }
+
+            100% {
+                text-shadow: 0 0 8px rgba(255, 100, 0, 0.3);
+            }
+        }
+
+        .section-heading {
+            text-align: center;
+            font-weight: bold;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ff6a00, #ee0979);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            color: #ee0979;
+            font-weight: 600;
+        }
+
+        .diet-meal p {
+            margin-bottom: 6px;
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ff6a00;
+        }
+
+        footer {
+            background: #000;
+            color: #f5f5f5;
+            text-align: center;
+            padding: 20px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            text-shadow: 0 0 8px rgba(255, 106, 0, 0.4);
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #ff6a00;
+            color: #fff;
+        }
+
+        #diet {
+            padding-top: 60px;
+            padding-bottom: 60px;
+            background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+            border-top: 2px dashed #ffc107;
+            border-bottom: 2px dashed #ffc107;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">🍴 Flavor<span style="color: #ff5e62;">Nest</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="flavournest.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#recipes">Recipes</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Meal
+                            Plan</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="mealplan.html">Weekly Meal Plans</a></li>
+                            <li><a class="dropdown-item" href="diet chart.html">Diet Charts</a></li>
+                            <li><a class="dropdown-item" href="#">Tiffin Ideas</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Tiffin Ideas Section -->
+    <section id="tiffin" class="container my-5">
+        <h2 class="section-heading text-center" data-aos="fade-down" data-aos-duration="800">
+            🍱 Tiffin Ideas
+        </h2>
+        <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+            Healthy, delicious, and varied lunchbox inspirations for every day!
+        </p>
+
+        <div class="row g-4">
+            <!-- 1. Simple Veg Delight -->
+            <div class="col-md-6" data-aos="fade-right" data-aos-delay="200">
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">🥦 Simple Veg Delight</h5>
+                        <p><strong>Main:</strong> Vegetable pulao with curd.</p>
+                        <p><strong>Side:</strong> Carrot-cucumber salad.</p>
+                        <p><strong>Snack:</strong> Roasted makhana.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. South Indian -->
+            <div class="col-md-6" data-aos="fade-left" data-aos-delay="250">
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">🌿 South Indian Tiffin</h5>
+                        <p><strong>Main:</strong> 2 Idlis + Sambar + Coconut chutney.</p>
+                        <p><strong>Snack:</strong> Banana or soaked almonds.</p>
+                        <p><strong>Drink:</strong> Buttermilk or jeera water.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Non-Veg Wrap -->
+            <div class="col-md-6" data-aos="fade-right" data-aos-delay="300">
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">🍗 Chicken Wrap Combo</h5>
+                        <p><strong>Main:</strong> Chicken lettuce mayo wrap.</p>
+                        <p><strong>Side:</strong> Veg sticks with hummus.</p>
+                        <p><strong>Sweet:</strong> Dark chocolate piece.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Maharashtrian Special -->
+            <div class="col-md-6" data-aos="fade-left" data-aos-delay="350">
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">🍛 Maharashtrian Special</h5>
+                        <p><strong>Main:</strong> Theplas + Dry chutney + Curd.</p>
+                        <p><strong>Snack:</strong> Bhakarwadi or chiwda.</p>
+                        <p><strong>Fruit:</strong> Seasonal fruit.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Gujarati Mini Thali -->
+            <div class="col-md-6" data-aos="fade-right" data-aos-delay="400">
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">🍲 Gujarati Mini Thali</h5>
+                        <p><strong>Main:</strong> 2 Rotis + Bhindi sabzi + Rice.</p>
+                        <p><strong>Side:</strong> Kachumber salad + curd.</p>
+                        <p><strong>Sweet:</strong> Small piece of sukhdi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Continental Veg -->
+            <div class="col-md-6" data-aos="fade-left" data-aos-delay="450">
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">🥪 Continental Veg Tiffin</h5>
+                        <p><strong>Main:</strong> Cheese + spinach grilled sandwich.</p>
+                        <p><strong>Side:</strong> Cherry tomato + lettuce salad.</p>
+                        <p><strong>Snack:</strong> Apple slices with peanut butter.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Punjabi Paratha Box -->
+            <div class="col-md-6" data-aos="fade-right" data-aos-delay="500">
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">🧅 Punjabi Paratha Box</h5>
+                        <p><strong>Main:</strong> 2 Aloo parathas + butter + pickle.</p>
+                        <p><strong>Side:</strong> Sweet lassi or curd.</p>
+                        <p><strong>Snack:</strong> Gur chikki or dry dates.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Egg Roll Tiffin -->
+            <div class="col-md-6" data-aos="fade-left" data-aos-delay="550">
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body">
+                        <h5 class="card-title">🍳 Egg Roll Delight</h5>
+                        <p><strong>Main:</strong> 2 Egg rolls with onion & chutney.</p>
+                        <p><strong>Side:</strong> Boiled corn salad.</p>
+                        <p><strong>Drink:</strong> Lemonade or fruit juice.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light text-center py-4">
+        <p class="mb-0">&copy; 2025 FlavorNest. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+    <!-- Before </body> -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+
+</html>
